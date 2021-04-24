@@ -5,19 +5,18 @@ import java.sql.*;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("hola");
-        String url = "jdbc:postgresql://localhost:5432/pesca";
+        String url = "jdbc:postgresql://localhost:5432/carrental";
         try {
-           //Class.forName("org.postgresql.Driver");
+            //Class.forName("org.postgresql.Driver");
             Connection connection = null;
             connection = DriverManager.getConnection(url,"postgres","9270");
             Statement instruccion = connection.createStatement();
             boolean valid = connection.isValid(50000);
             System.out.println(valid ? "TEST OK" : "TEST FAIL");
-            String sql = "SELECT nombre_miembro FROM miembro";
+            String sql = "SELECT * FROM reservation";
             ResultSet resultado = instruccion.executeQuery(sql);
             while(resultado.next()) {
-                System.out.println("nombre: " + resultado.getString("nombre_miembro"));
+                System.out.println("precio: " +resultado.getString("total_price"));
             }
             resultado.close();
             instruccion.close();
