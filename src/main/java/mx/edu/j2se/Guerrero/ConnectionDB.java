@@ -3,8 +3,8 @@ package mx.edu.j2se.Guerrero;
 import java.sql.*;
 
 public class ConnectionDB {
-    private static final String URL = "jdbc:postgresql://localhost:5432/carrental";
-    private static final String USER = "postgres";
+    private static final String URL = "jdbc:mysql://localhost:3306/carrental?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String USER = "root";
     private static final String PASSWORD = "9270";
 
     public static Connection getConnection() throws SQLException{

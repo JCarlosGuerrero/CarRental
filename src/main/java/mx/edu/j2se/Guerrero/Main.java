@@ -5,24 +5,22 @@ import java.sql.*;
 public class Main {
 
     public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5432/carrental";
-        try {
-            //Class.forName("org.postgresql.Driver");
-            Connection connection = null;
-            connection = DriverManager.getConnection(url,"postgres","9270");
-            Statement instruccion = connection.createStatement();
-            boolean valid = connection.isValid(50000);
-            System.out.println(valid ? "TEST OK" : "TEST FAIL");
-            String sql = "SELECT * FROM reservation";
-            ResultSet resultado = instruccion.executeQuery(sql);
-            while(resultado.next()) {
-                System.out.println("precio: " +resultado.getString("total_price"));
+        String url = "jdbc:mysql://localhost:3306/carrental?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+            try {
+                //Class.forName("com.mysql.jdbc.Driver");
+                Connection conexion = DriverManager.getConnection(url,"root","9270");
+                Statement instruccion = conexion.createStatement();
+                String sql = "SELECT id_client, name_client, last_name, phone FROM client";
+                ResultSet resultado = instruccion.executeQuery(sql);
+                while(resultado.next()) {
+                    System.out.println("Id_client: " + resultado.getInt("id_client"));
+                    System.out.println("name_client: " + resultado.getString("name_client"));
+                    System.out.println("last_name: " + resultado.getString("last_name"));
+                    System.out.println("phone: " + resultado.getString("phone"));
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
-            resultado.close();
-            instruccion.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-        }
     }
 }
